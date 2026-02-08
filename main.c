@@ -8,7 +8,7 @@
 
 static struct proc_dir_entry *top_entry;
 
-static int __init top_init(void)
+static int top_init(void)
 {
     top_entry = proc_create_single("top", 644, NULL, get_top);
     if (top_entry == NULL) {
@@ -21,14 +21,14 @@ static int __init top_init(void)
     return 0;
 }
 
-static void __exit top_cleanup(void)
+static void top_exit(void)
 {
     proc_remove(top_entry);
     pr_info("/proc/top is removed\n");
 }
 
 module_init(top_init);
-module_exit(top_cleanup);
+module_exit(top_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("nutsalhan87");
